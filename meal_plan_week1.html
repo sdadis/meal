@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Month 2 Meal Plan — Reduce Sugar Cravings & Improve Insulin Sensitivity</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #fdf6ed;
+    --warm-white: #fffcf7;
+    --sage: #7a9e7e;
+    --sage-light: #b5ceb8;
+    --sage-dark: #4e7153;
+    --terracotta: #c9714a;
+    --terracotta-light: #e8a882;
+    --gold: #d4a843;
+    --gold-light: #f0d08a;
+    --deep: #2c2416;
+    --mid: #6b5c47;
+    --light: #a89880;
+    --veg-bg: #eef5ef;
+    --veg-border: #7a9e7e;
+    --nv-bg: #fdf0e8;
+    --nv-border: #c9714a;
+    --card-shadow: 0 4px 24px rgba(44, 36, 22, 0.08);
+    --card-shadow-hover: 0 12px 40px rgba(44, 36, 22, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background-color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--deep);
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--sage-dark) 0%, #3a5c3e 40%, #2c2416 100%);
+    padding: 64px 40px 56px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 1;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: var(--gold-light);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .hero h1 span {
+    color: var(--gold-light);
+  }
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.5px;
+    margin-bottom: 36px;
+  }
+  .hero-pills {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .pill {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.85);
+    padding: 8px 16px;
+    border-radius: 100px;
+    font-size: 13px;
+  }
+  .pill span { font-size: 16px; }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    padding: 24px 20px;
+    flex-wrap: wrap;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--mid);
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 3px;
+  }
+  .legend-dot.veg { background: var(--sage); }
+  .legend-dot.nv { background: var(--terracotta); }
+
+  /* GRID */
+  .week-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* DAY CARD */
+  .day-card {
+    background: var(--warm-white);
+    border-radius: 20px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    border: 1px solid rgba(44,36,22,0.06);
+  }
+  .day-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .day-header {
+    padding: 20px 24px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(44,36,22,0.07);
+  }
+  .day-header.veg { background: var(--veg-bg); }
+  .day-header.nv { background: var(--nv-bg); }
+
+  .day-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--deep);
+  }
+  .day-type-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .day-type-badge.veg {
+    background: rgba(122,158,126,0.15);
+    color: var(--sage-dark);
+    border: 1px solid rgba(122,158,126,0.3);
+  }
+  .day-type-badge.nv {
+    background: rgba(201,113,74,0.12);
+    color: var(--terracotta);
+    border: 1px solid rgba(201,113,74,0.25);
+  }
+
+  /* MEALS */
+  .meals-body { padding: 12px 8px 16px; }
+
+  .meal-row {
+    display: flex;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 4px;
+    align-items: flex-start;
+    transition: background 0.15s;
+  }
+  .meal-row:hover { background: rgba(44,36,22,0.03); }
+
+  .meal-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .meal-icon-wrap.breakfast { background: #fef9ec; }
+  .meal-icon-wrap.midmorning { background: #f0faf1; }
+  .meal-icon-wrap.lunch { background: #fff4ef; }
+  .meal-icon-wrap.evening { background: #f0f5ff; }
+  .meal-icon-wrap.dinner { background: #f5f0ff; }
+
+  .meal-content { flex: 1; min-width: 0; }
+  .meal-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--light);
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .meal-items { display: flex; flex-wrap: wrap; gap: 5px; }
+  .item-tag {
+    background: rgba(44,36,22,0.055);
+    color: var(--mid);
+    font-size: 12.5px;
+    font-weight: 400;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+  .item-tag.highlight {
+    background: rgba(122,158,126,0.13);
+    color: var(--sage-dark);
+    font-weight: 500;
+  }
+  .item-tag.highlight.nv-hl {
+    background: rgba(201,113,74,0.1);
+    color: var(--terracotta);
+  }
+
+  .divider {
+    height: 1px;
+    background: rgba(44,36,22,0.06);
+    margin: 4px 16px;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    padding: 48px 20px 24px;
+    color: var(--light);
+    font-size: 13px;
+  }
+  .footer strong { color: var(--mid); }
+
+  /* SECTION TITLE */
+  .section-title {
+    text-align: center;
+    padding: 40px 20px 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--light);
+  }
+
+  @media (max-width: 600px) {
+    .hero { padding: 48px 20px 44px; }
+    .week-grid { padding: 0 16px; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">Month 2 · Weeks 1–4</div>
+  <h1>Your <span>Wellness</span><br>Meal Plan</h1>
+  <p class="hero-sub">Reduce Sugar Cravings &amp; Improve Insulin Sensitivity</p>
+  <div class="hero-pills">
+    <div class="pill"><span>🌿</span> Low Glycemic</div>
+    <div class="pill"><span>💪</span> High Protein</div>
+    <div class="pill"><span>🌾</span> Whole Grains</div>
+    <div class="pill"><span>⚖️</span> Balanced Macros</div>
+  </div>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot veg"></div> Vegetarian Day</div>
+  <div class="legend-item"><div class="legend-dot nv"></div> Non-Vegetarian Day</div>
+</div>
+
+<p class="section-title">Weekly Meal Schedule</p>
+
+<!-- GRID -->
+<div class="week-grid">
+
+  <!-- MONDAY -->
+  <div class="day-card">
+    <div class="day-header veg">
+      <div class="day-name">Monday</div>
+      <div class="day-type-badge veg">🥦 Veg</div>
+    </div>
+    <div class="meals-body">
+      <div class="meal-row">
+        <div class="meal-icon-wrap breakfast">🌅</div>
+        <div class="meal-content">
+          <div class="meal-label">Breakfast</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Moong Chilla ×2–3</span>
+            <span class="item-tag">Mint Chutney</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap midmorning">🍃</div>
+        <div class="meal-content">
+          <div class="meal-label">Mid-Morning</div>
+          <div class="meal-items">
+            <span class="item-tag">1 Guava</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap lunch">☀️</div>
+        <div class="meal-content">
+          <div class="meal-label">Lunch</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">2 Jowar Rotis</span>
+            <span class="item-tag">Mixed Veg Sabzi</span>
+            <span class="item-tag">Dal</span>
+            <span class="item-tag">Salad</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap evening">🌤️</div>
+        <div class="meal-content">
+          <div class="meal-label">Evening</div>
+          <div class="meal-items">
+            <span class="item-tag">Roasted Chana</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap dinner">🌙</div>
+        <div class="meal-content">
+          <div class="meal-label">Dinner</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Paneer Bhurji</span>
+            <span class="item-tag">Stir-Fried Vegetables</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TUESDAY -->
+  <div class="day-card">
+    <div class="day-header nv">
+      <div class="day-name">Tuesday</div>
+      <div class="day-type-badge nv">🍗 Non-Veg</div>
+    </div>
+    <div class="meals-body">
+      <div class="meal-row">
+        <div class="meal-icon-wrap breakfast">🌅</div>
+        <div class="meal-content">
+          <div class="meal-label">Breakfast</div>
+          <div class="meal-items">
+            <span class="item-tag highlight nv-hl">Egg Omelette</span>
+            <span class="item-tag">Vegetable Salad</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap lunch">☀️</div>
+        <div class="meal-content">
+          <div class="meal-label">Lunch</div>
+          <div class="meal-items">
+            <span class="item-tag highlight nv-hl">Grilled Chicken</span>
+            <span class="item-tag">Salad</span>
+            <span class="item-tag">Stir-Fried Vegetables</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap evening">🌤️</div>
+        <div class="meal-content">
+          <div class="meal-label">Evening</div>
+          <div class="meal-items">
+            <span class="item-tag">Handful Almonds</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap dinner">🌙</div>
+        <div class="meal-content">
+          <div class="meal-label">Dinner</div>
+          <div class="meal-items">
+            <span class="item-tag highlight nv-hl">Fish Curry</span>
+            <span class="item-tag">Minimal Oil</span>
+            <span class="item-tag">Vegetables</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WEDNESDAY -->
+  <div class="day-card">
+    <div class="day-header nv">
+      <div class="day-name">Wednesday</div>
+      <div class="day-type-badge nv">🍗 Non-Veg</div>
+    </div>
+    <div class="meals-body">
+      <div class="meal-row">
+        <div class="meal-icon-wrap breakfast">🌅</div>
+        <div class="meal-content">
+          <div class="meal-label">Breakfast</div>
+          <div class="meal-items">
+            <span class="item-tag highlight nv-hl">3 Eggs</span>
+            <span class="item-tag">Cucumber</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap lunch">☀️</div>
+        <div class="meal-content">
+          <div class="meal-label">Lunch</div>
+          <div class="meal-items">
+            <span class="item-tag highlight nv-hl">Chicken Curry</span>
+            <span class="item-tag">2 Jowar Rotis</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap evening">🌤️</div>
+        <div class="meal-content">
+          <div class="meal-label">Evening</div>
+          <div class="meal-items">
+            <span class="item-tag">Buttermilk</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap dinner">🌙</div>
+        <div class="meal-content">
+          <div class="meal-label">Dinner</div>
+          <div class="meal-items">
+            <span class="item-tag highlight nv-hl">Chicken Soup</span>
+            <span class="item-tag">Vegetable Stir-Fry</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THURSDAY -->
+  <div class="day-card">
+    <div class="day-header veg">
+      <div class="day-name">Thursday</div>
+      <div class="day-type-badge veg">🥦 Veg</div>
+    </div>
+    <div class="meals-body">
+      <div class="meal-row">
+        <div class="meal-icon-wrap breakfast">🌅</div>
+        <div class="meal-content">
+          <div class="meal-label">Breakfast</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Besan Chilla</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap lunch">☀️</div>
+        <div class="meal-content">
+          <div class="meal-label">Lunch</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Rajma</span>
+            <span class="item-tag">2 Bajra Rotis</span>
+            <span class="item-tag">Salad</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap evening">🌤️</div>
+        <div class="meal-content">
+          <div class="meal-label">Evening</div>
+          <div class="meal-items">
+            <span class="item-tag">Sprouts</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap dinner">🌙</div>
+        <div class="meal-content">
+          <div class="meal-label">Dinner</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Paneer Tikka</span>
+            <span class="item-tag">Vegetables</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FRIDAY -->
+  <div class="day-card">
+    <div class="day-header veg">
+      <div class="day-name">Friday</div>
+      <div class="day-type-badge veg">🥦 Veg</div>
+    </div>
+    <div class="meals-body">
+      <div class="meal-row">
+        <div class="meal-icon-wrap breakfast">🌅</div>
+        <div class="meal-content">
+          <div class="meal-label">Breakfast</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Oats with Chia Seeds</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap lunch">☀️</div>
+        <div class="meal-content">
+          <div class="meal-label">Lunch</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Chole</span>
+            <span class="item-tag">2 Jowar Rotis</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap evening">🌤️</div>
+        <div class="meal-content">
+          <div class="meal-label">Evening</div>
+          <div class="meal-items">
+            <span class="item-tag">Coconut Water</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap dinner">🌙</div>
+        <div class="meal-content">
+          <div class="meal-label">Dinner</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Tofu / Paneer Stir Fry</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SATURDAY -->
+  <div class="day-card">
+    <div class="day-header veg">
+      <div class="day-name">Saturday</div>
+      <div class="day-type-badge veg">🥦 Veg</div>
+    </div>
+    <div class="meals-body">
+      <div class="meal-row">
+        <div class="meal-icon-wrap breakfast">🌅</div>
+        <div class="meal-content">
+          <div class="meal-label">Breakfast</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Sprouts Bowl</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap lunch">☀️</div>
+        <div class="meal-content">
+          <div class="meal-label">Lunch</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Mixed Dal</span>
+            <span class="item-tag">2 Rotis</span>
+            <span class="item-tag">Salad</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap evening">🌤️</div>
+        <div class="meal-content">
+          <div class="meal-label">Evening</div>
+          <div class="meal-items">
+            <span class="item-tag">Walnuts</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap dinner">🌙</div>
+        <div class="meal-content">
+          <div class="meal-label">Dinner</div>
+          <div class="meal-items">
+            <span class="item-tag highlight">Vegetable Soup</span>
+            <span class="item-tag">Paneer</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUNDAY -->
+  <div class="day-card">
+    <div class="day-header nv">
+      <div class="day-name">Sunday</div>
+      <div class="day-type-badge nv">🍗 Non-Veg</div>
+    </div>
+    <div class="meals-body">
+      <div class="meal-row">
+        <div class="meal-icon-wrap breakfast">🌅</div>
+        <div class="meal-content">
+          <div class="meal-label">Breakfast</div>
+          <div class="meal-items">
+            <span class="item-tag highlight nv-hl">Eggs</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap lunch">☀️</div>
+        <div class="meal-content">
+          <div class="meal-label">Lunch</div>
+          <div class="meal-items">
+            <span class="item-tag highlight nv-hl">Fish or Chicken</span>
+            <span class="item-tag">Salad</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap evening">🌤️</div>
+        <div class="meal-content">
+          <div class="meal-label">Evening</div>
+          <div class="meal-items">
+            <span class="item-tag">Nuts</span>
+          </div>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="meal-row">
+        <div class="meal-icon-wrap dinner">🌙</div>
+        <div class="meal-content">
+          <div class="meal-label">Dinner</div>
+          <div class="meal-items">
+            <span class="item-tag highlight nv-hl">Chicken Soup</span>
+            <span class="item-tag">Vegetables</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+  <p><strong>Month 2 · Weeks 1–4</strong> &nbsp;·&nbsp; Goal: Reduce Sugar Cravings &amp; Improve Insulin Sensitivity</p>
+  <p style="margin-top:8px; font-size:12px;">Follow consistently for best results. Stay hydrated. Avoid refined sugars &amp; processed foods.</p>
+</div>
+
+</body>
+</html>
